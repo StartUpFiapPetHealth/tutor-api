@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId -> MongoDB version
+  id        Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  routine   Routine[]
+}
+
+model Routine {
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int @id @default(autoincrement())
+  dayOfWeek Int
+  avaiablePeriod AvaiblePeriod[]
+  tutor    User?    @relation(fields: [tutorId], references: [id])
+  tutorId  Int
+  // tutorId  String   @db.ObjectId
+}
+
+model AvaiblePeriod{
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int @id @default(autoincrement())
+  routine   Routine?    @relation(fields: [routineId], references: [id])
+  // routineId  String   @db.ObjectId
+  routineId Int
+}
