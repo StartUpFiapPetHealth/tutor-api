@@ -1,5 +1,6 @@
-interface Tutor {
+interface ITutor {
+    id : number;
     firstName : string;
-    lasName : string;
+    lastName : string;
     email : string;
 }

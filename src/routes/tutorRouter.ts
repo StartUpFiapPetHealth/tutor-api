@@ -11,5 +11,4 @@ tutorRouter.get("/tutor", listTutors);
 tutorRouter.get("/tutor/:id", getTutorById);
 tutorRouter.post("/tutor", createTutor);
 tutorRouter.put("/tutor", updateTutor);
-tutorRouter.delete("/tutor", deleteTutor);
-
+tutorRouter.delete("/tutor/:id", deleteTutor);

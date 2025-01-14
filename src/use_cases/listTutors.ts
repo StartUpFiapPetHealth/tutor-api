@@ -1,9 +1,17 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { MakeTutorRepository } from "../repository/makeTutorRepository";
+
+const tutorRepository = new MakeTutorRepository().createTutorRepostitory();
+
 async function  listTutors(req : Request, res : Response) {
-    const prisma = new PrismaClient();
-    const result = await prisma.user.findMany();
-    res.status(200).send(result);
+    try{
+
+        const result = await tutorRepository.getTutors();
+        
+        res.status(200).send(result);
+    }catch(error){
+        res.status(500).send(error);
+    }
 }
 
 export default listTutors;

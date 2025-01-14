@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { MakeTutorRepository } from "../repository/makeTutorRepository";
 
+const tutorRepository = new MakeTutorRepository().createTutorRepostitory();
 
-async function createTutor(req : Request, res: Response){
-    const prisma = new PrismaClient();
-    let newTutorPayload = req.body;
+async function createTutor(req : Request, res: Response){    
+    try{
 
-    let jsonPayload = JSON.stringify(newTutorPayload);
-    const user = await prisma.user.create({
-        data: {
-          firstName: req.body.firstName,
-          email : req.body.email
-        },
-      })
-    res.send(`Creating tutor with the following data \n ${jsonPayload}`);
-}
+        let tutor : ITutor = req.body as ITutor;
+        
+        const savedTutor = await tutorRepository.saveTutor(tutor);
+        
+        res.send(`Creating tutor with the following data \n ${savedTutor}`);
+    }catch(error){
+        res.status(500).send(error);
+    }
+
+ }
 
 export default createTutor;

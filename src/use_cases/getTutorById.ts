@@ -1,9 +1,17 @@
 import { Request, Response } from "express";
+import { MakeTutorRepository } from "../repository/makeTutorRepository";
+
+const tutorRepository = new MakeTutorRepository().createTutorRepostitory();
 
 async function getTutorById(req : Request, res : Response){
-    console.log('get tutor by id');
-    let id : string = req.params.id;
-    res.send(`Find tutor by id ${id}`);
+    try{
+
+        let id : number = Number(req.params.id);
+        let tutor = await tutorRepository.getTutorById(id);
+        res.send(tutor);
+    }catch(error){
+        res.status(500).send(error);
+    }
 }
 
 export default getTutorById;

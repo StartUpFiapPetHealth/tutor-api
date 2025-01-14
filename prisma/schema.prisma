@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Tutor {
   // id        String   @id @default(auto()) @map("_id") @db.ObjectId -> MongoDB version
   id        Int @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -25,7 +25,7 @@ model Routine {
   id        Int @id @default(autoincrement())
   dayOfWeek Int
   avaiablePeriod AvaiblePeriod[]
-  tutor    User?    @relation(fields: [tutorId], references: [id])
+  tutor    Tutor?    @relation(fields: [tutorId], references: [id])
   tutorId  Int
   // tutorId  String   @db.ObjectId
 }
