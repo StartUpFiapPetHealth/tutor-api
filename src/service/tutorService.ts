@@ -1,4 +1,5 @@
-export interface ITutorRepository{
+
+export interface ITutorService{
     saveTutor(tutor : ITutor) : any
     updateTutor(tutor : ITutor) : any
     deleteTutor(id : number) : any

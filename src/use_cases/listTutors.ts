@@ -1,12 +1,13 @@
 import { Request, Response } from "express";
 import { MakeTutorRepository } from "../repository/makeTutorRepository";
+import { MakeTutorService } from "../service/makeTutorService";
 
-const tutorRepository = new MakeTutorRepository().createTutorRepostitory();
+const tutorService = MakeTutorService.createTutorService();
 
 async function  listTutors(req : Request, res : Response) {
     try{
 
-        const result = await tutorRepository.getTutors();
+        const result = await tutorService.getTutors();
         
         res.status(200).send(result);
     }catch(error){

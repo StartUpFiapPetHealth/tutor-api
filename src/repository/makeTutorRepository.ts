@@ -1,9 +1,9 @@
-import { MongoTutorRepository } from "../mongo/mongoTutorRepository";
-import { ITutorRepository } from "./tutorRepository";
+import { MongoTutorRepository } from "./mongo/mongoTutorRepository";
+import { IRepository } from "./repository";
 
 export class MakeTutorRepository{
 
-    createTutorRepostitory() : ITutorRepository{
+    static createTutorRepostitory() : IRepository<ITutor>{
         return new MongoTutorRepository();
     }
 

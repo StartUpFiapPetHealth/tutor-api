@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { ITutorRepository } from "../repository/tutorRepository";
+import { IRepository } from "../repository";
 
-export class MongoTutorRepository implements ITutorRepository{
+export class MongoTutorRepository implements IRepository<ITutor>{
 
     prisma : PrismaClient;
 
@@ -9,7 +9,7 @@ export class MongoTutorRepository implements ITutorRepository{
         this.prisma  = new PrismaClient();
     }
     
-    saveTutor(tutor: ITutor){
+    save(tutor: ITutor){
         return this.prisma.tutor.create({
             data:{
                 firstName: tutor.firstName,
@@ -18,7 +18,7 @@ export class MongoTutorRepository implements ITutorRepository{
             }
         );
     }
-    updateTutor(tutor: ITutor) {
+    update(tutor: ITutor) {
         return this.prisma.tutor.update({
             where : {
                 email :tutor.email,                
@@ -30,7 +30,7 @@ export class MongoTutorRepository implements ITutorRepository{
         });
     }
 
-    getTutorById(tutorId: number) {
+    findById(tutorId: number) {
         return this.prisma.tutor.findFirst({
             where: {
                 id : tutorId       
@@ -49,11 +49,11 @@ export class MongoTutorRepository implements ITutorRepository{
         )
     }
 
-    getTutors(): Promise<any[]>{
+    getAll(): Promise<any[]>{
         return this.prisma.tutor.findMany();
     }
 
-    deleteTutor(tutorId: number) {
+    delete(tutorId: number) {
         return this.prisma.tutor.delete(
             {
                 where:{
