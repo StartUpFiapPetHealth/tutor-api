@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { IRepository } from "../repository";
 
 export class MongoTutorRepository implements IRepository<ITutor>{
@@ -8,29 +8,57 @@ export class MongoTutorRepository implements IRepository<ITutor>{
     constructor(){
         this.prisma  = new PrismaClient();
     }
+
+    createRoutinePrismaJsonArray(tutor : ITutor){
+        let routineArr = [] as Prisma.JsonArray;
+        tutor.routines.forEach(routine => {
+            let avaiablePeriodarr = [] as Prisma.JsonArray;
+            routine.avaiablePeriods.forEach(ap =>{
+                avaiablePeriodarr.push({
+                    startTime :ap.startTime,
+                    endTime : ap.endTime
+                });
+            });
+            routineArr.push(
+                {
+                    dayOfWeek : routine.dayOfWeek,
+                    avaiablePeriods : avaiablePeriodarr
+                }
+            );
+        });
+
+        return routineArr;
+    }
     
-    save(tutor: ITutor){
+    save(tutor: ITutor) : Promise<ITutor>{
+        let routineArr = this.createRoutinePrismaJsonArray(tutor);
         return this.prisma.tutor.create({
-            data:{
-                firstName: tutor.firstName,
-                email : tutor.email
+            data:
+                {
+                    firstName : tutor.firstName,
+                    lastName: tutor.lastName,
+                    email : tutor.email,
+                    routines : routineArr
                 }
             }
-        );
+        ).then();
     }
-    update(tutor: ITutor) {
+    update(tutor: ITutor) : Promise<ITutor>{
+        let routineArr = this.createRoutinePrismaJsonArray(tutor);
         return this.prisma.tutor.update({
             where : {
-                email :tutor.email,                
+                id :tutor.id,                
             },
             data:{
                 firstName : tutor.firstName,
-                lastName: tutor.lastName
+                lastName: tutor.lastName,
+                email : tutor.email,
+                routines : routineArr
             }
-        });
+        }).then();
     }
 
-    findById(tutorId: number) {
+    findById(tutorId: string) : Promise<ITutor>{
         return this.prisma.tutor.findFirst({
             where: {
                 id : tutorId       
@@ -42,25 +70,25 @@ export class MongoTutorRepository implements IRepository<ITutor>{
              email: true,
              firstName: true,
              lastName: true,
-             routine: true,
+             routines: true,
   
             }
         }
-        )
+        ).then()
     }
 
-    getAll(): Promise<any[]>{
-        return this.prisma.tutor.findMany();
+    getAll(): Promise<ITutor[]>{
+        return this.prisma.tutor.findMany().then();
     }
 
-    delete(tutorId: number) {
+    delete(tutorId: string) {
         return this.prisma.tutor.delete(
             {
                 where:{
                     id:tutorId
                 }
             }
-        )
+        ).then()
     }   
 
 }

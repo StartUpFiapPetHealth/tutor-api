@@ -1,16 +1,17 @@
 interface ITutor {
-    id : number;
+    id : string;
     firstName : string;
     lastName : string;
     email : string;
+    routines : IRoutine[];
 }
 
 interface IRoutine{
     dayOfWeek : number;
-    avaiablePeriods : AvaiblePeriod[];
+    avaiablePeriods : AvaiablePeriod[];
 }
 
-interface AvaiblePeriod{
-    startTime : Date;
-    endTime : Date;
+interface AvaiablePeriod{
+    startTime : string;
+    endTime : string;
 }

@@ -1,7 +1,7 @@
 export interface IRepository<T>{
-    save(tutor : T) : any
-    update(tutor : T) : any
-    delete(id : number) : any
-    findById(id : number) : any
-    getAll() : Promise<any[]>
+    save(tutor : T) : Promise<T>
+    update(tutor : T) : Promise<T>
+    delete(id : string) : any
+    findById(id : string) : Promise<T>
+    getAll() : Promise<T[]>
 }

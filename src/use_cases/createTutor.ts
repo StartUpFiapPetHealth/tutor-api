@@ -8,11 +8,11 @@ async function createTutor(req : Request, res: Response){
     try{
 
         let tutor : ITutor = req.body as ITutor;
-        
         const savedTutor = await tutorService.saveTutor(tutor);
         
         res.send(`Creating tutor with the following data \n ${savedTutor}`);
     }catch(error){
+        console.log(error);
         res.status(500).send(error);
     }
 

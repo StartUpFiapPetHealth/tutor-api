@@ -4,6 +4,7 @@ import { ITutorService } from "./tutorService";
 export class TutorService implements ITutorService{
     
     repository : IRepository<ITutor>;
+
     constructor(repository : IRepository<ITutor>){
         this.repository = repository;
     }
@@ -13,19 +14,19 @@ export class TutorService implements ITutorService{
     }
 
     updateTutor(tutor: ITutor) {
-        this.repository.update(tutor);
+        return this.repository.update(tutor);
     }
 
-    deleteTutor(id: number) {
-        throw new Error("Method not implemented.");
+    deleteTutor(id: string) {
+        this.repository.delete(id);
     }
 
-    getTutorById(id: number) {
-        throw new Error("Method not implemented.");
+    getTutorById(id: string) : Promise<ITutor> {
+        return this.repository.findById(id);
     }
 
-    getTutors(): Promise<any[]> {
-        throw new Error("Method not implemented.");
+    getTutors(): Promise<ITutor[]> {
+        return this.repository.getAll();
     }
 
 }

@@ -1,8 +1,8 @@
 
 export interface ITutorService{
-    saveTutor(tutor : ITutor) : any
-    updateTutor(tutor : ITutor) : any
-    deleteTutor(id : number) : any
-    getTutorById(id : number) : any
-    getTutors() : Promise<any[]>
+    saveTutor(tutor : ITutor) : Promise<ITutor>
+    updateTutor(tutor : ITutor) : Promise<ITutor>
+    deleteTutor(id : string) : any
+    getTutorById(id : string) : Promise<ITutor>
+    getTutors() : Promise<ITutor[]>
 }

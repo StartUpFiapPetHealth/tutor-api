@@ -7,10 +7,8 @@ const tutorService = MakeTutorService.createTutorService();
 async function updateTutor(req : Request, res : Response){
     try{
 
-        
-        let id = Number(req.body.id);
-        let dbTutor = await tutorService.getTutorById(id);
-        let tutor = req.body as ITutor;
+        let tutor : ITutor = req.body as ITutor;
+        let dbTutor = await tutorService.getTutorById(tutor.id);
         
         if(dbTutor === null)
             res.status(404).send("Tutor not found!");
@@ -18,6 +16,7 @@ async function updateTutor(req : Request, res : Response){
         await tutorService.updateTutor(tutor);
         res.status(201).send("Tutor updated!");
     }catch(error){
+        console.log(error);
         res.status(500).send(error);
     }
 }
