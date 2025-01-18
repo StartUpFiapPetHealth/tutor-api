@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { MakeTutorRepository } from "../repository/makeTutorRepository";
 import { MakeTutorService } from "../service/makeTutorService";
-
+import { sendMessage } from "../middleware/message/sendTutorCreatedMessage";
 const tutorService = MakeTutorService.createTutorService();
 
 async function createTutor(req : Request, res: Response){    
@@ -9,7 +9,7 @@ async function createTutor(req : Request, res: Response){
 
         let tutor : ITutor = req.body as ITutor;
         const savedTutor = await tutorService.saveTutor(tutor);
-        
+        sendMessage(savedTutor.email);
         res.send(`Creating tutor with the following data \n ${savedTutor}`);
     }catch(error){
         console.log(error);
