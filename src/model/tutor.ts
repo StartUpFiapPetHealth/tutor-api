@@ -3,6 +3,7 @@ interface ITutor {
     firstName : string;
     lastName : string;
     email : string;
+    contactNumber : string;
     routines : IRoutine[];
 }
 

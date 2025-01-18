@@ -1,7 +1,7 @@
 import amqp from "amqplib";
 import dotenv from 'dotenv';
 
-export function sendMessage(tutorEmail : string){
+export function sendMessage(tutor : ITutor){
 
     const amqplib = require('amqplib/callback_api');
     
@@ -13,7 +13,16 @@ export function sendMessage(tutorEmail : string){
       
       
           await channel.assertQueue(tutorQueue, { durable: false });
-          channel.sendToQueue(tutorQueue, Buffer.from(JSON.stringify({"tutorEmail":tutorEmail})));
+          await channel.sendToQueue(tutorQueue, 
+                Buffer.from(JSON.stringify(
+                        {
+                            "tutorEmail": tutor.email,
+                            "tutorId" : tutor.id,
+                            "contactNumber" : tutor.contactNumber
+                        }
+                    )
+                )
+            );
 
         } catch (err) {
           console.warn(err);

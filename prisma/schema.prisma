@@ -16,5 +16,6 @@ model Tutor {
   email     String   @unique
   firstName String?
   lastName  String?
+  contactNumber String?
   routines   Json?
 }

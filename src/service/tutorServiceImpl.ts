@@ -17,8 +17,8 @@ export class TutorService implements ITutorService{
         return this.repository.update(tutor);
     }
 
-    deleteTutor(id: string) {
-        this.repository.delete(id);
+    deleteTutor(id: string) : Promise<void> {
+        return this.repository.delete(id);
     }
 
     getTutorById(id: string) : Promise<ITutor> {

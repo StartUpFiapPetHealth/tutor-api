@@ -9,7 +9,7 @@ async function createTutor(req : Request, res: Response){
 
         let tutor : ITutor = req.body as ITutor;
         const savedTutor = await tutorService.saveTutor(tutor);
-        sendMessage(savedTutor.email);
+        await sendMessage(savedTutor);
         res.send(`Creating tutor with the following data \n ${savedTutor}`);
     }catch(error){
         console.log(error);

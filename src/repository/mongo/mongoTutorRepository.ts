@@ -38,6 +38,7 @@ export class MongoTutorRepository implements IRepository<ITutor>{
                     firstName : tutor.firstName,
                     lastName: tutor.lastName,
                     email : tutor.email,
+                    contactNumber : tutor.contactNumber,
                     routines : routineArr
                 }
             }
@@ -53,6 +54,7 @@ export class MongoTutorRepository implements IRepository<ITutor>{
                 firstName : tutor.firstName,
                 lastName: tutor.lastName,
                 email : tutor.email,
+                contactNumber : tutor.contactNumber,
                 routines : routineArr
             }
         }).then();
@@ -70,6 +72,7 @@ export class MongoTutorRepository implements IRepository<ITutor>{
              email: true,
              firstName: true,
              lastName: true,
+             contactNumber : true,
              routines: true,
   
             }
