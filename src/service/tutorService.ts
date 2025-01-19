@@ -1,4 +1,6 @@
 
+import { ITutor } from "../model/tutor";
+
 export interface ITutorService{
     saveTutor(tutor : ITutor) : Promise<ITutor>
     updateTutor(tutor : ITutor) : Promise<ITutor>

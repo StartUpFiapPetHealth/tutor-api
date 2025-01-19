@@ -1,5 +1,6 @@
 import amqp from "amqplib";
 import dotenv from 'dotenv';
+import { ITutor } from "../../model/tutor";
 
 export function sendMessage(tutor : ITutor){
 

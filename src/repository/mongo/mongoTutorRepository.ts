@@ -1,6 +1,7 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { IRepository } from "../repository";
-
+import type {ITutor} from "../../model/tutor";
+import {IRoutine} from "../../model/routine";
 export class MongoTutorRepository implements IRepository<ITutor>{
 
     prisma : PrismaClient;
@@ -77,7 +78,7 @@ export class MongoTutorRepository implements IRepository<ITutor>{
   
             }
         }
-        ).then()
+        ).then();
     }
 
     getAll(): Promise<ITutor[]>{

@@ -1,5 +1,7 @@
 import { IRepository } from "../repository/repository";
 import { ITutorService } from "./tutorService";
+import { ITutor } from "../model/tutor";
+import { TutorNotFound } from "../error/tutor.exceptions";
 
 export class TutorService implements ITutorService{
     
@@ -13,7 +15,10 @@ export class TutorService implements ITutorService{
         return this.repository.save(tutor);
     }
 
-    updateTutor(tutor: ITutor) {
+    updateTutor(tutor: ITutor) : Promise<ITutor> {
+        const dbTutor = this.getTutorById(tutor.id);
+        if(dbTutor === null)
+            throw new TutorNotFound(tutor.id);
         return this.repository.update(tutor);
     }
 

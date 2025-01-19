@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { MakeTutorRepository } from "../repository/makeTutorRepository";
 import { MakeTutorService } from "../service/makeTutorService";
 import { sendMessage } from "../middleware/message/sendTutorCreatedMessage";
+import { ITutor } from "../model/tutor";
+
 const tutorService = MakeTutorService.createTutorService();
 
 async function createTutor(req : Request, res: Response){    
