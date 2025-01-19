@@ -17,7 +17,7 @@ const swaggerOptions = {
         ],
       }
       ,
-      apis: ["src/routes/tutorRouter.ts"]
+      apis: ["src/routes/tutorRouter.ts", "routes/tutorRouter.js"]
     };
 
 const swaggerDoc = swaggerJson(swaggerOptions);
