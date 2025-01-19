@@ -1,16 +1,14 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: mongo:6
-    container_name: mongodb
+  tutor-api-mongo:
+    image: prismagraphql/mongo-single-replica:5.0.3
+    container_name: tutor-api-mongo
     ports:
       - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: nutripet
-      MONGO_INITDB_ROOT_PASSWORD: tepirtun
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: root
 
 volumes:
   mongo-data:
