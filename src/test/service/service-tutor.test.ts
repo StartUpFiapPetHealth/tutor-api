@@ -8,6 +8,7 @@ vi.mock("../../../src/repository/mongo/mongoTutorRepository");
 
 describe("TutorService", () => {
     let service : TutorService;
+    //@ts-expect-error
     let mockedRepository : vi.Mocked<MongoTutorRepository>;
 
     const mockedTutor : ITutor = {
@@ -71,7 +72,7 @@ describe("TutorService", () => {
     //     // mockedRepository.update.mockResoldValue(mockedTutor);
     //     const result = await service.updateTutor(mockedTutor);
     
-    //     await expect(service.updateTutor(mockedTutor))  .toThrow(TutorNotFound);
+    //     await expect(service.updateTutor(mockedTutor)).toThrow(TutorNotFound);
 
        
     // });
@@ -81,7 +82,7 @@ describe("TutorService", () => {
         const result = await service.deleteTutor(mockedTutor.id);
     
         expect(mockedRepository.delete).toHaveBeenCalledTimes(1);
-       expect(result).toBeTruthy();
+        expect(result).toBeTruthy();
     });
 });
 
